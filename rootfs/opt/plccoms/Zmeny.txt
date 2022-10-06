@@ -5,6 +5,61 @@
 
 
 ---------------------------------------------------------------------------
+    Verze 6.0					Zkompilovano 24.06.2022
+---------------------------------------------------------------------------
+
+	- Oprava nastaveni RT priority. Hodnota promenne COMM_SCHED_PRI = 0 nastavila RT planovac na prioritu 1.
+	- Oprava prikazu GETINFO:. Pri pripojeni vice klientu nebyla odpoved zakoncena jako zeznam. Tedy praznym prikazem GETINFO:
+
+---------------------------------------------------------------------------
+    Verze 5.9					Zkompilovano 09.05.2022
+---------------------------------------------------------------------------
+
+	- Oprava. Nahrazeno slovo 'register(s)' za 'variable(s)' v chybovych zpravach.
+	- Oprava. Odstranena promenna DIFF_VAR_ENABLED_DI.
+	- Oprava zpracovani SET: prikazu u nesledovanych promennych. Promenne se do PLC posilaji najednou a ne po jedne.
+	- Oprava chyby na architekture AARCH64 (Debian bullseye): PLCComS->RealizeCommObject():: Unable to set stack size for MEM thread attributes!
+
+---------------------------------------------------------------------------
+    Verze 5.8					Zkompilovano 16.12.2021
+---------------------------------------------------------------------------
+
+	- Funkce crcPLC() nahrazena tabulkou. Rychlejsi vypocet.
+
+	- Oprava skladani klientskych dotazu. Problem s PLC funkcnim blokem pro synchronizaci promennych (iCool).
+	- Oprava stahovani PUB souboru pri zmene projektu pomoci TTR. Kdyz neni zapnut zapis souboru, tak se pri chybe nestahne PUB soubor.
+	- Oprava. Kvuli rychlosti je na panelech ID-3x vypnuto paralelni ziskavani dat prikazem GETMEM:.Promenna MEM_USE_THREADS.
+	- Oprava. Kvuli rychlosti je na panelech ID-3x vypnouto generovani DIFF: zprav u zakazanych promennych. Promenna DIFF_VAR_ENABLED_DI.
+	- Oprava. Pri odesilani odpevedi se nezpracovavaji dotazy. Jsouli odpovedi dlouhe a posilaji se po castech, tak se nesmi nijak narusit.
+	- Oprava. Pokud je CRC projektu 0, tak funkce InitPubfileCommObject() skonci chybou a nastahuje PUB soubor.
+	- Oprava. DIFF: zpravy se posilaji jako posledni, aby nenarusovali odesilane odpovedi.
+	- Oprava ztraty promennych v odpovedich LIST:, GET: a DIFF:. Pokud je odpoved dlouha a rozdeli se, tak se ze seznamu zpracovanich polozek smaze i jedna nezpracovana polozka.
+	- Oprava. Dotaz GETINFO:NETWORK je seznam a tak take musi byt zakoncen.
+	- Oprava padu aplikace pri zmene projektu. Pokud se meni projekt v PLC pomoci TTR balicku, tak vypadne EPSNET komunikace a nestahne se PUB soubor. Problem s verzi FW 3.9 na CP-2xxx.
+
+---------------------------------------------------------------------------
+    Verze 5.7					Zkompilovano 15.12.2020
+---------------------------------------------------------------------------
+
+	- Opravena chyba na EPSNET komunikaci. Chybne se skladali EPNET frame do jednoho paketu. Centrala pak vracela chybnou velikost dat.
+
+---------------------------------------------------------------------------
+    Verze 5.6					Zkompilovano 27.10.2020
+---------------------------------------------------------------------------
+
+	- Pridana jmena threadu:
+
+	    Jmeno sekce - Hlavni smycka (COMM objekt)
+	    MEM		- Prace s pameti
+	    FFG		- Get file
+	    FFW		- Write file
+
+	- Opravena chyba neuvolnovani pameti v prikazu GETMEM:
+	- Opravena chyba v prikazu GETMEM:. Prikaz obcas zpusobil vyjimku SEGV.
+	- Opravena chyba testu velikosti zpravy v prikazu READN v 'libepsnet.a'. Je-li promennych mnoho, tak se spatne skladaji EPSNET frame
+	  a centrala neodpovi na dotaz.
+
+---------------------------------------------------------------------------
     Verze 5.5					Zkompilovano 09.09.2020
 ---------------------------------------------------------------------------
 
@@ -149,7 +204,7 @@
 	- Pri zmene komunikacnich parametru PLC zkusi server aktualizovat PUB soubor a klientovi to ohlasi zpravou 250 nebo 251.
 	- Pridan zapis souboru pomoci prikazu WRITEFILE: a WRITEFILEINFO:
 	- Zrychlena reakce serveru na klientske dotazy. Krome panelu ID-18/28, ktere nemaji dostatecny vykon. To znamena, ze kdyz prijde dotaz od klienta, tak se prerusi sleep v hlavni smycce.
-	  Sleep se take prerusit v pripade zpracovani prikazu SET:. To je dulezite kvuli rychle odpovedi zpravou DIFF:.
+	  Sleep se take prerusit v pripade zpracovani prikazu SET:. To je dulezite kvuli rychle odpovedi zpravou DIFF:.
 	- Pro mereni casu se v hlavni smycce nepouziva funkce getdifftime(), ale gettimeofday() a makro timersub().
 
 	- Opravena chyba. V pripade, ze neni nastavena promenna PUBFILE_WRITE, tak se PUB soubor hleda v korenovem adresari serveru.
