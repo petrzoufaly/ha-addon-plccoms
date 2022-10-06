@@ -1,0 +1,16 @@
+---
+name: PLCComS
+version: dev
+slug: plccoms
+description: PLCComS - Tecomat PLC communication server - init-false.
+url: https://github.com/petrzoufaly
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: services
+ports:
+  5011/tcp: 5011
