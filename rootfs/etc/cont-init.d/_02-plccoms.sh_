@@ -1,9 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Home Assistant Community Add-on: Base Images
-# Sets the log level correctly
-# ==============================================================================
-
-bashio::log.blue "Running PLCComs from init"
-cd /opt/plccoms
-./PLCComS.sh

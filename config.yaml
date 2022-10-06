@@ -2,8 +2,8 @@
 name: PLCComS
 version: dev
 slug: plccoms
-description: PLCComS - Tecomat PLC communication server - init-false.
-url: https://github.com/petrzoufaly
+description: Tecomat PLC communication server
+url: https://github.com/petrzoufaly/ha-addon-plccoms
 init: false
 arch:
   - aarch64
