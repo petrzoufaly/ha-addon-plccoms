@@ -1,6 +1,6 @@
 # Home Assistant Add-on: PLCComS
 
-PLCComS - Communication server.
+PLCComS - Communication server implemented as Home Assistant addon.
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 
@@ -15,23 +15,27 @@ Communication server provide TCP/IP connection with client device and a PLC. Com
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 
 
-## Program arguments:
+## Home Assistant configuration.yaml example:
 ```
-	Usage: PLCComS [-dtvh] [-c <configfile>] [-l <logfile>]
-
-		-d, --daemon    fork into background
-		-t, --terminate terminate if configuration file was changed
-		-v, --verbose   verbose mode (multiple -v options increase the verbosity)
-		-c, --config    configuration file
-		-l, --log       log file
-		-h, --help      display this help and exit
-
-	Default values:
-
-		configfile      PLCComS.ini
-		logfile         PLCComS.log
+switch:
+  - platform: telnet
+    switches:
+      ac_bedroom:
+        name: "A/C Bedroom"
+        resource: 192.168.1.190 #ip of PLCcomS (Home Assistant)
+        port: 5011 #port of PLCcomS (defined in addon config)
+        command_on: "SET:T_ZONES_SET[0].TOPIT_TC,1\n"
+        command_off: "SET:T_ZONES_SET[0].TOPIT_TC,0\n"
+        command_state: "GET:T_ZONES_SET[0].TOPIT_TC\r\n"
+        value_template: '{{ value == "GET:T_ZONES_SET[0].TOPIT_TC,1" }}'
+        timeout: 3
 ```
-## Client protocol:
+## Configuration file `PLCComS.ini`:
+
+Your TECO device has to be defined in **rootfs / opt / plccoms / PLCComS.ini**
+
+
+## Client protocol, use putty to test:
 
 Is simple text oriented protocol. Every line is ended new line character (DOS [\r\n] or UNIX [\n]). For testing is possible use telnet client.
 ```
@@ -119,14 +123,4 @@ Is simple text oriented protocol. Every line is ended new line character (DOS [\
 ```
 Commands and variable names is not case sensitive. Is possible combine upper and lower chracters. Closing connection in telnet client is via ansi escape sequence ctrl+d.
 
-## Public file `*.pub`:
 
-Describe feedback between PLC register names (Absolute address of variable in PLC) and symbolic names.
-
-## Configuration file `PLCComS.ini`:
-
-Describe connection between clients (Via TCP port number) and PLC (Via IP address). Name of public file (If public file is absent in local disk is downloaded from PLC).
-
-## Installation:
-
-On OS Linux, just run the Install.sh script `bash ./Install.sh`, which sets the server to start automatically when the system starts. Server output is stored to `/var/log/PLCComS.log` file.
