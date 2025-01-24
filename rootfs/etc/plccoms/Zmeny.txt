@@ -5,6 +5,24 @@
 
 
 ---------------------------------------------------------------------------
+    Verze 6.2					Zkompilovano 19.06.2024
+---------------------------------------------------------------------------
+
+	- Oprava EPSNET komunikace: Pokun cesta k souboru zacina '../', nema smysl komunikovat pres EPSNET.
+
+---------------------------------------------------------------------------
+    Verze 6.1					Zkompilovano 01.06.2023
+---------------------------------------------------------------------------
+
+	- Pridan vypis zasobniku pri padu aplikace.
+
+	- Oprava problemu s On-Line zmenou programu. Po zmene CRC programu se nejprve nacte novy PUB soubor, pak se smaze obraz pameti PLC a nacte se obraz novy.
+	- Oprava prace s nesledovanymi promennymi. Pri nastaveni promenne se vzdy vygeneruje DIFF: zprava.
+	- Oprava. Zrychleni odesilani dlouhych odpovedi pro klientske dotazy. Dlouhe odpovedi se posilaji po castech a je proto potreba zkratit dobu cyklu, dokud se vse neodesle.
+	- Oprava zobrazeni inentifikacniho retezce PLC. Nebyla zobrazena cela verze FW PLC.
+	- Oprava posilani WARNING: a ERROR: zprav pri On-Line zmene programu PLC. Pokud se behem zmeny vygeneruje prilis mnoho DIFF: zprav, tak se WARNING: ani ERROR: zpravy neodeslou kvuli ochrane proti zahlceni klienta.
+
+---------------------------------------------------------------------------
     Verze 6.0					Zkompilovano 24.06.2022
 ---------------------------------------------------------------------------
 
@@ -204,7 +222,7 @@
 	- Pri zmene komunikacnich parametru PLC zkusi server aktualizovat PUB soubor a klientovi to ohlasi zpravou 250 nebo 251.
 	- Pridan zapis souboru pomoci prikazu WRITEFILE: a WRITEFILEINFO:
 	- Zrychlena reakce serveru na klientske dotazy. Krome panelu ID-18/28, ktere nemaji dostatecny vykon. To znamena, ze kdyz prijde dotaz od klienta, tak se prerusi sleep v hlavni smycce.
-	  Sleep se take prerusit v pripade zpracovani prikazu SET:. To je dulezite kvuli rychle odpovedi zpravou DIFF:.
+	  Sleep se take prerusit v pripade zpracovani prikazu SET:. To je dulezite kvuli rychle odpovedi zpravou DIFF:.
 	- Pro mereni casu se v hlavni smycce nepouziva funkce getdifftime(), ale gettimeofday() a makro timersub().
 
 	- Opravena chyba. V pripade, ze neni nastavena promenna PUBFILE_WRITE, tak se PUB soubor hleda v korenovem adresari serveru.

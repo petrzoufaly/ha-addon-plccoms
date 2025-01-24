@@ -25,9 +25,9 @@ case $ARCH in
 	       LIBSDIR="lib_rpi2"
 	       ;;
     aarch64)   PLCCOMS="PLCComS_aarch64"
-	       LIBSDIR=""
+	       LIBSDIR="lib_rpi4"
 	       ;;
-    *)         echo "Unknown or unsupporten architecture: $ARCH"
+    *)         echo "Unknown or unsupported architecture: $ARCH"
 	       exit 1
 	       ;;
 esac
@@ -35,7 +35,7 @@ esac
 export LD_LIBRARY_PATH=$LIBSDIR
 
 echo
-echo "ARCH: $ARCH"
+echo "ARCH: $ARCH, Library: $LIBSDIR"
 echo
 
 killall -9 "$PLCCOMS" >/dev/null 2>&1

@@ -1,0 +1,24 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: Base Images
+# Runs the TECOMAT PLCComS
+# ==============================================================================
+
+bashio::log.blue \
+        '-----------------------------------------------------------'
+bashio::log.blue "Running PLCComS from s6 !!this one is not used, I guess?!!"
+bashio::log.blue \
+        '-----------------------------------------------------------'
+
+exec /etc/plccoms/PLCComS.sh
+#cd /etc/plccoms
+#./PLCComS.sh
+
+
+#(cd /etc/plccoms && /etc/plccoms/PLCComS.sh)
+
+#pushd /etc/plccoms
+#./PLCComS.sh
+# Get back where you were at the beginning.
+#popd

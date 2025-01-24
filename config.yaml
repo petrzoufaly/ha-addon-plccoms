@@ -1,6 +1,6 @@
 ---
 name: PLCComS
-version: dev
+version: 1.0.5
 slug: plccoms
 description: Tecomat PLC communication server
 url: https://github.com/petrzoufaly/ha-addon-plccoms
