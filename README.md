@@ -31,6 +31,26 @@ switch:
         command_state: "GET:T_ZONES_SET[0].TOPIT_TC\r\n"
         value_template: '{{ value == "GET:T_ZONES_SET[0].TOPIT_TC,1" }}'
         timeout: 3
+    bojler:
+      name: "Boiler"
+      resource: 192.168.1.190
+      port: 5011
+      command_on: "SET:BOJLER1ONOFF,1\n"
+      command_off: "SET:BOJLER1ONOFF,0\n"
+      command_state: "GET:BOJLER1ONOFF\r\n"
+      value_template: '{{ value == "GET:BOJLER1ONOFF,1" }}'
+      timeout: 3
+
+sensor:
+  - platform: tcp
+    name: "Boiler status"
+    host: 192.168.1.190
+    port: 5011
+    timeout: 5
+    payload: "GET:BOJLER1ONOFF\r\n"
+    value_template: "{{ value.split(',')[1] }}"
+    #response: "GET:BOJLER1ONOFF,1" let'S split on comma
+
 ```
 ## Configuration file `PLCComS.ini`:
 
