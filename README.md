@@ -1,6 +1,6 @@
 # Home Assistant Add-on: PLCComS
 
-PLCComS - Communication server implemented as Home Assistant addon.
+PLCComS - Communication server implemented as Home Assistant addon, based on [Home Assistant Community Add-on: Base Images](https://github.com/hassio-addons/addon-debian-base).
 
 Tested with rpi4-64.
 

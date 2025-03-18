@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install base system
 ARG BUILD_ARCH=amd64
-ARG BASHIO_VERSION="v0.16.2"
+ARG BASHIO_VERSION="v0.16.3"
 ARG S6_OVERLAY_VERSION="3.2.0.2"
 ARG TEMPIO_VERSION="2024.11.2"
 RUN \
@@ -34,9 +34,9 @@ RUN \
     && apt-get install -y --no-install-recommends \
         bash=5.2.15-2+b7 \
         ca-certificates=20230311 \
-        curl=7.88.1-10+deb12u8 \
+        curl=7.88.1-10+deb12u12 \
         jq=1.6-2.1 \
-        tzdata=2024b-0+deb12u1 \
+        tzdata=2025a-0+deb12u1 \
         xz-utils=5.4.1-0.2 \
     \
     && c_rehash \
