@@ -1,4 +1,10 @@
 # Changelog
+## 1.0.7
+
+- Updated 2026-01-20
+- Dropped 32-bit support 
+- Updated from addon-debian-base source image v9.1.0
+- Base image updated to debian:13.2-slim
 
 ## 1.0.6
 

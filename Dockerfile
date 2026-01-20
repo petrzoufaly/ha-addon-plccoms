@@ -1,4 +1,4 @@
-ARG BUILD_FROM=debian:12.9-slim
+ARG BUILD_FROM=debian:13.2-slim
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -25,26 +25,24 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install base system
 ARG BUILD_ARCH=amd64
-ARG BASHIO_VERSION="v0.16.3"
-ARG S6_OVERLAY_VERSION="3.2.0.2"
+ARG BASHIO_VERSION="v0.17.5"
+ARG S6_OVERLAY_VERSION="3.2.1.0"
 ARG TEMPIO_VERSION="2024.11.2"
 RUN \
     apt-get update \
     \
     && apt-get install -y --no-install-recommends \
-        bash=5.2.15-2+b7 \
-        ca-certificates=20230311 \
-        curl=7.88.1-10+deb12u12 \
-        jq=1.6-2.1 \
-        tzdata=2025a-0+deb12u1 \
-        xz-utils=5.4.1-0.2 \
+        bash=5.2.37-2+b5 \
+        ca-certificates=20250419 \
+        curl=8.14.1-2+deb13u2 \
+        jq=1.7.1-6+deb13u1 \
+        tzdata=2025b-4+deb13u1 \
+        xz-utils=5.8.1-1 \
     \
     && c_rehash \
     \
     && S6_ARCH="${BUILD_ARCH}" \
-    && if [ "${BUILD_ARCH}" = "i386" ]; then S6_ARCH="i686"; \
-    elif [ "${BUILD_ARCH}" = "amd64" ]; then S6_ARCH="x86_64"; \
-    elif [ "${BUILD_ARCH}" = "armv7" ]; then S6_ARCH="arm"; fi \
+    && if [ "${BUILD_ARCH}" = "amd64" ]; then S6_ARCH="x86_64"; fi \
     \
     && curl -L -s "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz" \
         | tar -C / -Jxpf - \
